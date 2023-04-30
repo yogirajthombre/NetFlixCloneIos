@@ -1,13 +1,8 @@
-//
-//  HomeViewController.swift
-//  NetFlixClone
-//
-//  Created by Yogiraj Thombre on 4/29/23.
-//
-
 import UIKit
 
 class HomeViewController: UIViewController {
+    
+    let sectionHeaders = ["Top Rated","Trending Now","Anime","HollyWood Movies","Action Thriller"]
     
     private let homeFeedTable : UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -39,7 +34,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController : UITableViewDelegate , UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 30
+        return sectionHeaders.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -57,6 +52,17 @@ extension HomeViewController : UITableViewDelegate , UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionHeaders[section]
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.font = .systemFont(ofSize: 20)
+        header.textLabel?.textColor = .white
+//        header.textLabel?.frame = CGRect(x: <#T##Double#>, y: <#T##Double#>, width: <#T##Double#>, height: <#T##Double#>)
     }
     
 }
