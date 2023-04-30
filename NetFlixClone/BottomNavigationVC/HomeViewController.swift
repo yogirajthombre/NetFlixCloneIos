@@ -10,8 +10,8 @@ import UIKit
 class HomeViewController: UIViewController {
     
     private let homeFeedTable : UITableView = {
-        let table = UITableView()
-        table.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        let table = UITableView(frame: .zero, style: .grouped)
+        table.register(ContentTableViewCell.self, forCellReuseIdentifier: ContentTableViewCell.identifier)
         return table
     }()
 
@@ -24,6 +24,8 @@ class HomeViewController: UIViewController {
         
         homeFeedTable.delegate = self
         homeFeedTable.dataSource = self
+        
+        homeFeedTable.tableHeaderView = HeaderViewCell(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 400))
         
     }
     
@@ -45,9 +47,16 @@ extension HomeViewController : UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellView = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cellView.textLabel?.text = "hello yogiraj"
+        let cellView = tableView.dequeueReusableCell(withIdentifier: ContentTableViewCell.identifier, for: indexPath)
         return cellView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
     }
     
 }
